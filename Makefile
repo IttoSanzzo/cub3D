@@ -6,7 +6,7 @@
 #    By: marcosv2 <marcosv2@student.42.rio>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/19 21:52:16 by marcosv2          #+#    #+#              #
-#    Updated: 2025/02/09 18:06:32 by marcosv2         ###   ########.fr        #
+#    Updated: 2025/02/09 18:08:50 by marcosv2         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -128,10 +128,11 @@ bonus		: ${NAME}
 	@${C_PUTS} "${P_GREEN}Bonus Done!${P_WHITE}\n"
 
 clean		:
-	$(C_REMO) minilibx-linux/
 	@${MAKE} clean --no-print-directory -C ${D_LBFT}
 	@${C_PUTS} "${P_NWINE}Cleaning ${NAME} objects...${P_WHITE}\n"
 	@${C_REMO} ${D_OBJS}
+	@${C_PUTS} "${P_NWINE}Deleting mlx${P_WHITE}\n"
+	@$(C_REMO) minilibx-linux/
 
 fclean		:
 	@${MAKE} fclean --no-print-directory -C ${D_LBFT}
@@ -139,6 +140,8 @@ fclean		:
 	@${C_REMO} ${D_OBJS}
 	@${C_PUTS} "${P_NWINE}Deleting ${NAME}...${P_WHITE}\n"
 	@${C_REMO} ${NAME}
+	@${C_PUTS} "${P_NWINE}Deleting mlx${P_WHITE}\n"
+	@$(C_REMO) minilibx-linux/
 
 re		: fclean all
 

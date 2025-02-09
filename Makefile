@@ -6,7 +6,7 @@
 #    By: marcosv2 <marcosv2@student.42.rio>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/19 21:52:16 by marcosv2          #+#    #+#              #
-#    Updated: 2024/04/25 15:19:59 by marcosv2         ###   ########.fr        #
+#    Updated: 2025/02/09 17:54:05 by marcosv2         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,11 +16,11 @@ NAME	= cub3D
 LIBFT	= libft
 MAKE	= make
 C_COMP	= cc
-C_FLAG	= -Wall -Werror -Wextra
+C_FLAG	= -Wall -Werror -Wextra -lm
 C_REMO	= rm -rf
 C_MDIR	= mkdir -p
 C_PUTS	= printf
-C_LIBX	= -lX11 -lXext -lmlx -lm
+C_LIBX	= -Lminilibx-linux -lmlx_Linux -lX11 -lXext
 
 # Dirs
 

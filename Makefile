@@ -6,7 +6,7 @@
 #    By: marcosv2 <marcosv2@student.42.rio>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/19 21:52:16 by marcosv2          #+#    #+#              #
-#    Updated: 2025/02/09 17:54:05 by marcosv2         ###   ########.fr        #
+#    Updated: 2025/02/09 18:06:32 by marcosv2         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -68,27 +68,27 @@ N_MLX	=	cb_mlx_init.c		\
 			cb_mlx_events.c		\
 			cb_render.c			\
 
-F_SRCS	= $(addprefix $(D_SRCS)$(DS_MAIN), $(N_MAIN))
-F_SRCS	+= $(addprefix $(D_SRCS)$(DS_PARS), $(N_PARS))
-F_SRCS	+= $(addprefix $(D_SRCS)$(DS_UTIL), $(N_UTIL))
-F_SRCS	+= $(addprefix $(D_SRCS)$(DS_DRAW), $(N_DRAW))
-F_SRCS	+= $(addprefix $(D_SRCS)$(DS_RAY), $(N_RAY))
-F_SRCS	+= $(addprefix $(D_SRCS)$(DS_MLX), $(N_MLX))
+F_SRCS	= ${addprefix ${D_SRCS}${DS_MAIN}, ${N_MAIN}}
+F_SRCS	+= ${addprefix ${D_SRCS}${DS_PARS}, ${N_PARS}}
+F_SRCS	+= ${addprefix ${D_SRCS}${DS_UTIL}, ${N_UTIL}}
+F_SRCS	+= ${addprefix ${D_SRCS}${DS_DRAW}, ${N_DRAW}}
+F_SRCS	+= ${addprefix ${D_SRCS}${DS_RAY}, ${N_RAY}}
+F_SRCS	+= ${addprefix ${D_SRCS}${DS_MLX}, ${N_MLX}}
 
-#F_SRCS	+= $(addprefix $(D_SRCS)$(DS_), $(N_))
+#F_SRCS	+= ${addprefix ${D_SRCS)${DS_), ${N_))
 
-N_OBJS	=	$(N_MAIN:.c=.o)	\
-			$(N_PARS:.c=.o)	\
-			$(N_UTIL:.c=.o)	\
-			$(N_DRAW:.c=.o)	\
-			$(N_RAY:.c=.o)	\
-			$(N_MLX:.c=.o)
-F_OBJS	= $(addprefix $(D_OBJS), $(N_OBJS))
+N_OBJS	=	${N_MAIN:.c=.o}	\
+			${N_PARS:.c=.o}	\
+			${N_UTIL:.c=.o}	\
+			${N_DRAW:.c=.o}	\
+			${N_RAY:.c=.o}	\
+			${N_MLX:.c=.o}
+F_OBJS	= ${addprefix ${D_OBJS}, ${N_OBJS}}
 
 # Libft
 
 N_LBFT	= libft.a
-F_LBFT	= $(addprefix $(D_LBFT), $(N_LBFT))
+F_LBFT	= ${addprefix ${D_LBFT}, ${N_LBFT}}
 
 # Colors
 P_WHITE = \033[0m
@@ -103,52 +103,49 @@ P_NWINE = \033[38;5;88m
 
 # Mandatory Rules
 
-all		: $(NAME)
+all		: ${NAME}
 
-$(NAME)		: $(F_LBFT) $(D_OBJS) $(F_OBJS)
-	@$(C_PUTS) "\n\t$(P_NCYAN)Finishing binary..: $(P_LBLUE)$(NAME)$(P_WHITE)\n"
-	@$(C_COMP) $(C_FLAG) -o $@ $(F_OBJS) $(F_LBFT) $(C_LIBX)
-	@$(C_PUTS) "$(P_GREEN)Done!$(P_WHITE)\n"
+${NAME}		: ${F_LBFT} ${D_OBJS} ${F_OBJS}
+	@${C_PUTS} "\n\t${P_NCYAN}Finishing binary..: ${P_LBLUE}${NAME}${P_WHITE}\n"
+	@${C_COMP} ${C_FLAG} -o $@ ${F_OBJS} ${F_LBFT} ${C_LIBX}
+	@${C_PUTS} "${P_GREEN}Done!${P_WHITE}\n"
 
-$(D_OBJS)%.o	: $(D_SRCS)*/%.c
-	@$(C_PUTS) "\t$(P_PRPLE)Generating $(NAME)..: %-33.33s\r $(P_WHITE)" $@
-	@$(C_COMP) $(C_FLAG) $(D_HDRS) -c $< -o $@ $(C_LIBX)
+${D_OBJS}%.o	: ${D_SRCS}*/%.c
+	@${C_PUTS} "\t${P_PRPLE}Generating ${NAME}..: %-33.33s\r ${P_WHITE}" $@
+	@${C_COMP} ${C_FLAG} ${D_HDRS} -c $< -o $@ ${C_LIBX}
 
-$(D_OBJS)	:
-	@$(C_PUTS) "$(P_LGREN)Starting $(NAME) compilation...$(P_WHITE)"
-	@$(C_PUTS) "\n\t$(P_MAGEN)Creating $(NAME) objects directory...$(P_WHITE)\n"
-	@$(C_MDIR) $(D_OBJS)
+${D_OBJS}	:
+	@${C_PUTS} "${P_LGREN}Starting ${NAME} compilation...${P_WHITE}"
+	@${C_PUTS} "\n\t${P_MAGEN}Creating ${NAME} objects directory...${P_WHITE}\n"
+	@${C_MDIR} ${D_OBJS}
+	sh ./components/setmlx.sh
 
-$(F_LBFT)	:
+${F_LBFT}	:
 	@clear
-	@$(MAKE) all --no-print-directory -C $(D_LBFT)
+	@${MAKE} all --no-print-directory -C ${D_LBFT}
 
-bonus		: $(NAME)
-	@$(C_PUTS) "$(P_GREEN)Bonus Done!$(P_WHITE)\n"
-
-#confmlx	:
-#@$(MAKE) all --no-print-directory -C ./minilibx-linux/
+bonus		: ${NAME}
+	@${C_PUTS} "${P_GREEN}Bonus Done!${P_WHITE}\n"
 
 clean		:
-#@$(MAKE) clean --no-print-directory -C ./minilibx-linux/
-	@$(MAKE) clean --no-print-directory -C $(D_LBFT)
-	@$(C_PUTS) "$(P_NWINE)Cleaning $(NAME) objects...$(P_WHITE)\n"
-	@${C_REMO} $(D_OBJS)
+	$(C_REMO) minilibx-linux/
+	@${MAKE} clean --no-print-directory -C ${D_LBFT}
+	@${C_PUTS} "${P_NWINE}Cleaning ${NAME} objects...${P_WHITE}\n"
+	@${C_REMO} ${D_OBJS}
 
 fclean		:
-#@$(MAKE) clean --no-print-directory -C ./minilibx-linux/
-	@$(MAKE) fclean --no-print-directory -C $(D_LBFT)
-	@$(C_PUTS) "$(P_NWINE)Cleaning $(NAME) objects...$(P_WHITE)\n"
-	@${C_REMO} $(D_OBJS)
-	@$(C_PUTS) "$(P_NWINE)Deleting $(NAME)...$(P_WHITE)\n"
-	@${C_REMO} $(NAME)
+	@${MAKE} fclean --no-print-directory -C ${D_LBFT}
+	@${C_PUTS} "${P_NWINE}Cleaning ${NAME} objects...${P_WHITE}\n"
+	@${C_REMO} ${D_OBJS}
+	@${C_PUTS} "${P_NWINE}Deleting ${NAME}...${P_WHITE}\n"
+	@${C_REMO} ${NAME}
 
 re		: fclean all
 
 # Test
 
 val		:
-	@valgrind --leak-check=full --show-leak-kinds=all ./$(NAME)
+	@valgrind --leak-check=full --show-leak-kinds=all ./${NAME}
 
 uplibft	:
 	@rm -rf ./libft/
@@ -159,12 +156,12 @@ setlib	:
 	@cp ~/Downloads/minilibx-linux.tgz ./
 	@tar zxvf minilibx-linux.tgz
 	@${C_REMO} minilibx-linux.tgz
-	@$(MAKE) --no-print-directory -C ./minilibx-linux/
-	@$(C_PUTS) "$(P_GREEN)Done!$(P_WHITE)\n"
+	@${MAKE} --no-print-directory -C ./minilibx-linux/
+	@${C_PUTS} "${P_GREEN}Done!${P_WHITE}\n"
 
 rmvlib	:
 	@${C_REMO} ./minilibx-linux
-	@$(C_PUTS) "$(P_GREEN)Done!$(P_WHITE)\n"
+	@${C_PUTS} "${P_GREEN}Done!${P_WHITE}\n"
 
 # Phony
 
